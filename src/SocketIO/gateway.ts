@@ -42,6 +42,15 @@ export class Gatway implements OnGatewayInit,OnGatewayConnection,OnGatewayDiscon
         this.server.to(`room_UNO`).emit('new_message',payload);
     }
 
+    @SubscribeMessage('newMessage')newMessage(
+        client: Socket,
+        payload,
+    ) {
+        console.log('newMessage')
+        this.server.to(`room_UNO`).emit('new_message_user',payload);
+    }
+
+
     @SubscribeMessage('event_leave')
         handleRoomLeave(client: Socket, room:string) {
         console.log(`Alguien salio de la sala room_${room}`)
